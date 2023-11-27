@@ -1,0 +1,12 @@
+{
+  "name": "stoltz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "scss": "node-sass -w scss/ -o css/ --recursive"
+  },  
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

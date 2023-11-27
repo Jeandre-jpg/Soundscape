@@ -1,0 +1,375 @@
+@font-face {
+  font-family: "Elephnt";
+  src: url("/styles/typography/ELEPHNT.TTF") format("truetype");
+}
+@font-face {
+  font-family: "AzeretMono-Light";
+  src: url("/styles/typography/static/AzeretMono-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "AzeretMono-ExtraBold";
+  src: url("/styles/typography/static/AzeretMono-ExtraBold.ttf") format("truetype");
+}
+* {
+  box-sizing: border-box;
+}
+*::before, *::after {
+  box-sizing: border-box;
+}
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+/* Chrome, Safari, Opera */
+/* Firefox */
+body { /* or use .wrapper if you prefer to wrap your .quiz-container */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Full viewport height */
+  margin: 0; /* Reset default margin */
+}
+
+.stars, .twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+.stars {
+  background: #000 url("/src/assets/icons/headers/stars.png") repeat top center;
+  z-index: 0;
+}
+
+.twinkling {
+  background: transparent url("/src/assets/icons/headers/twinkling.png") repeat top center;
+  z-index: 1; /* Firefox */ /* Chrome, Safari, Opera */
+  animation: move-twink-back 200s linear infinite;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.site-header .navbar {
+  border-bottom: 1px solid #fff;
+}
+.site-header .navbar .navbar-brand {
+  color: #fff;
+}
+
+.navbar-nav .nav-item .nav-link i.fab {
+  color: #fff;
+}
+.navbar-nav .nav-item .nav-link:hover i.fab {
+  color: #ccc;
+}
+
+.quiz-container {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 3;
+  position: relative;
+  padding: 12px;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  border-radius: 20px;
+}
+.quiz-container .quiz-carousel {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.quiz-container .quiz-carousel .quiz-slide {
+  display: none;
+}
+.quiz-container .quiz-carousel .quiz-slide.active {
+  display: block;
+}
+.quiz-container .quiz-carousel .quiz-slide .quiz-question {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.quiz-container .quiz-carousel .quiz-slide .quiz-answers {
+  list-style: none;
+  padding: 0;
+}
+.quiz-container .quiz-carousel .quiz-slide .quiz-answers li {
+  background-color: #ffffff;
+  color: #000;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.quiz-container .quiz-carousel .quiz-slide .quiz-answers li:hover {
+  background-color: white;
+}
+
+.quiz-container-q {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 4;
+  display: none;
+  position: relative;
+  padding: 12px;
+  max-height: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  border-radius: 20px;
+}
+.quiz-container-q .quiz-carousel {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.quiz-container-q .quiz-carousel .quiz-slide {
+  display: none;
+}
+.quiz-container-q .quiz-carousel .quiz-slide.active {
+  display: block;
+}
+.quiz-container-q .quiz-carousel .quiz-slide .quiz-question {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.quiz-container-q .quiz-carousel .quiz-slide .quiz-answers {
+  list-style: none;
+  padding: 0;
+}
+.quiz-container-q .quiz-carousel .quiz-slide .quiz-answers li {
+  background-color: #ffffff;
+  color: #000;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.quiz-container-q .quiz-carousel .quiz-slide .quiz-answers li:hover {
+  background-color: white;
+}
+
+.quiz-info {
+  padding: 20px;
+  margin-top: 150px;
+  width: 100%;
+  height: 450px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  padding-top: 15px;
+}
+.quiz-info h1 {
+  font-family: "Elephnt", sans-serif;
+  color: #CCB58B;
+  padding-top: 12px;
+}
+.quiz-info h2 {
+  color: #cfb7ac;
+  padding-top: 12px;
+  font-size: 25px;
+}
+.quiz-info p {
+  font-family: "AzeretMono-Light", sans-serif;
+  color: #847670;
+  padding-top: 15px;
+}
+.quiz-info.choose {
+  height: 620px;
+}
+
+.profile-pic {
+  border-radius: 12px;
+  width: 550px;
+  height: 425px;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  margin-left: 5%;
+  margin-top: 5%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.profile-pic.choose {
+  height: 580px;
+}
+
+.button {
+  border: none;
+  padding: 20px;
+  background-color: #0e1111;
+  cursor: pointer;
+  position: relative;
+  margin-top: 10px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px; /* Adjust as needed */
+  transition: background-color 0.3s;
+  outline: none;
+  font-family: "AzeretMono-Light", sans-serif;
+  color: #cfb7ac;
+  width: 200px;
+  height: 50px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px; /* Starting width */
+  height: 30px; /* Starting height */
+  background-color: #333;
+  border-radius: 50%;
+  transition: width 0.3s ease-out, border-radius 0.3s ease-out;
+  z-index: 0;
+  margin-left: -75px;
+}
+
+.text {
+  color: #333;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+.button:hover .circle {
+  width: 100%; /* Full width on hover */
+  border-radius: 20px; /* Rounded edges */
+  margin-left: 0px;
+  width: 200px;
+  height: 50px;
+}
+
+.button:hover .arrow {
+  transform: translateX(100%); /* Move the arrow to the right on hover */
+}
+
+.button:hover .text {
+  color: #FFF;
+}
+
+.button:hover {
+  background-color: #0e1111; /* Optional: change the button's background color on hover */
+}
+
+.category ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+}
+
+.category li {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.category button {
+  background-color: #CCB58B;
+  color: black;
+  border: none;
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.category button:hover {
+  background-color: #ccc;
+}
+
+.card {
+  display: none; /* By default, all cards are not displayed */
+}
+
+/* Optionally, you could use a specific class to show the active card */
+.card.active {
+  display: block; /* or 'flex' or whatever display type fits your design */
+}
+
+#dynamic-image-card1, #dynamic-image-card2, #dynamic-image-card3 {
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+  opacity: 1; /* Start with the image visible */
+}
+
+.fade-in {
+  opacity: 1; /* Fully visible */
+}
+
+.fade-out {
+  opacity: 0; /* Fully transparent */
+}
+
+.result-image {
+  /* Style for the images in the result cards */
+  max-width: 100px; /* Example size, adjust as needed */
+  margin: 10px;
+}
+
+audio {
+  /* Style for the audio player if needed */
+  margin: 10px;
+}
+
+.results-container {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 5;
+  position: relative;
+  padding: 12px;
+  max-width: 1300px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  color: #fff;
+}
+.results-container .result-card {
+  flex: 0 1 30%;
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 15px;
+  background-color: #252525;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+}
+.results-container .result-card h3 {
+  margin-bottom: 15px;
+}
+.results-container .result-card img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 15px;
+}
+.results-container .result-card audio {
+  width: 100%;
+  margin-top: 15px;
+}/*# sourceMappingURL=global.css.map */

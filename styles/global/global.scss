@@ -1,0 +1,425 @@
+@font-face {
+  font-family: 'Elephnt';
+  src: url('/styles/typography/ELEPHNT.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'AzeretMono-Light';
+  src: url('/styles/typography/static/AzeretMono-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AzeretMono-ExtraBold';
+  src: url('/styles/typography/static/AzeretMono-ExtraBold.ttf') format('truetype');
+}
+
+
+* {
+  box-sizing: border-box;
+  &::before, &::after {
+    box-sizing: border-box;
+  }
+}
+
+@keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+/* Chrome, Safari, Opera */ 
+@-webkit-keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+/* Firefox */
+@-moz-keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+
+body { /* or use .wrapper if you prefer to wrap your .quiz-container */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Full viewport height */
+  margin: 0; /* Reset default margin */
+}
+
+
+.stars, .twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0; 
+}
+
+
+.stars {
+background:#000 url('/src/assets/icons/headers/stars.png') repeat top center;
+z-index:0;
+}
+
+.twinkling{
+background:transparent url('/src/assets/icons/headers/twinkling.png') repeat top center;
+z-index:1;
+
+-moz-animation:move-twink-back 200s linear infinite; /* Firefox */
+-webkit-animation:move-twink-back 200s linear infinite; /* Chrome, Safari, Opera */ 
+animation:move-twink-back 200s linear infinite;
+}
+
+.site-header {
+  position: fixed; // or 'absolute'
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; 
+
+  .navbar {
+     // Semi-transparent background
+    border-bottom: 1px solid #fff; // Optional: adds a border for visual separation
+
+    .navbar-brand {
+      color: #fff; // Adjust as needed
+    }
+  }
+}
+
+.navbar-nav .nav-item .nav-link {
+  i.fab {
+    color: #fff; // Sets the icon color to white
+  }
+
+  &:hover {
+    i.fab {
+      color: #ccc; // Optional: Change icon color on hover for a visual effect
+    }
+  }
+}
+
+.quiz-container {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 3; 
+  position: relative; 
+  padding: 12px;
+  max-width: 1300px;
+  margin-left: auto;  
+  margin-right: auto;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  border-radius: 20px;
+  
+  .quiz-carousel {
+    max-width: 600px;
+    margin: 0 auto;
+    
+    .quiz-slide {
+      display: none; // Hide all slides by default
+      
+      &.active {
+        display: block; // Show the active slide
+      }
+      
+      .quiz-question {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .quiz-answers {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          background-color: #ffffff;
+          color: #000;
+          margin-bottom: 0.5rem;
+          padding: 0.75rem 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: lighten($color: #ffffff, $amount: 10);
+          }
+        }
+      }
+    }
+  }
+}
+
+.quiz-container-q {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 4; 
+  display: none;
+  position: relative; 
+  padding: 12px;
+  max-height: 100%;
+  max-width: 1300px;
+  margin-left: auto;  
+  margin-right: auto;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  border-radius: 20px;
+  
+  .quiz-carousel {
+    max-width: 600px;
+    margin: 0 auto;
+    
+    .quiz-slide {
+      display: none; // Hide all slides by default
+      
+      &.active {
+        display: block; // Show the active slide
+      }
+      
+      .quiz-question {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .quiz-answers {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          background-color: #ffffff;
+          color: #000;
+          margin-bottom: 0.5rem;
+          padding: 0.75rem 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: lighten($color: #ffffff, $amount: 10);
+          }
+        }
+      }
+    }
+  }
+}
+
+.quiz-info {
+  padding: 20px;
+  margin-top: 150px;
+  width: 100%;
+  height: 450px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  padding-top: 15px;
+
+  h1{
+    font-family: 'Elephnt', sans-serif;
+    color: #CCB58B;
+    padding-top: 12px;
+  }
+
+  h2{
+    color: #cfb7ac;
+    padding-top: 12px;
+    font-size: 25px;
+  }
+
+  p{
+    font-family: 'AzeretMono-Light', sans-serif;
+    color: #847670;
+    padding-top: 15px;
+  }
+
+  &.choose{
+    height: 620px;
+  }
+}
+
+.profile-pic{
+  border-radius: 12px;
+  width: 550px;
+  height: 425px;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  margin-left: 5%;
+  margin-top: 5%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
+  &.choose{
+    height: 580px;
+  }
+}
+
+.button {
+  border: none;
+  padding: 20px;
+  background-color: #0e1111;
+  cursor: pointer;
+  position: relative;
+  margin-top: 10px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px; /* Adjust as needed */
+  transition: background-color 0.3s;
+  outline: none;
+  font-family: 'AzeretMono-Light', sans-serif;
+  color: #cfb7ac;
+  width: 200px;
+  height: 50px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px; /* Starting width */
+  height: 30px; /* Starting height */
+  background-color: #333;
+  border-radius: 50%;
+  transition: width 0.3s ease-out, border-radius 0.3s ease-out;
+  z-index: 0;
+  margin-left: -75px;
+}
+
+.text {
+  color: #333;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+.button:hover .circle {
+  width: 100%; /* Full width on hover */
+  border-radius: 20px; /* Rounded edges */
+  margin-left: 0px;
+  width: 200px;
+  height: 50px;
+}
+
+.button:hover .arrow {
+  transform: translateX(100%); /* Move the arrow to the right on hover */
+}
+
+.button:hover .text {
+  color: #FFF;
+}
+
+.button:hover {
+  background-color: #0e1111; /* Optional: change the button's background color on hover */
+}
+
+
+.category ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  
+}
+
+.category li {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.category button {
+  background-color: #CCB58B;
+  color: black;
+  border: none;
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.category button:hover {
+  background-color: #ccc;
+}
+
+
+.card {
+  display: none; /* By default, all cards are not displayed */
+}
+
+/* Optionally, you could use a specific class to show the active card */
+.card.active {
+  display: block; /* or 'flex' or whatever display type fits your design */
+}
+
+#dynamic-image-card1, #dynamic-image-card2, #dynamic-image-card3 {
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+  opacity: 1; /* Start with the image visible */
+}
+
+
+.fade-in {
+  opacity: 1; /* Fully visible */
+}
+
+.fade-out {
+  opacity: 0; /* Fully transparent */
+}
+
+
+.result-image {
+  /* Style for the images in the result cards */
+  max-width: 100px; /* Example size, adjust as needed */
+  margin: 10px;
+}
+
+audio {
+  /* Style for the audio player if needed */
+  margin: 10px;
+}
+
+.results-container {
+  background: #0e1111;
+  background-size: cover;
+  z-index: 5; 
+  position: relative; 
+  padding: 12px;
+  max-width: 1300px;
+  margin: 20px auto; // center the container
+  display: flex; // use flexbox for layout
+  flex-wrap: wrap; // allow the items to wrap if needed
+  justify-content: space-around; // space out the child elements evenly
+  align-items: center; // vertically center the child elements
+  border-radius: 20px;
+  color: #fff;
+
+  .result-card {
+    flex: 0 1 30%; // each card will take up roughly 30% of the container width, flexing as needed
+    border: 1px solid #ddd; 
+    margin: 10px; // space between cards
+    padding: 15px;
+    background-color: #252525; // card background color
+    color: #fff; // text color for the card
+    display: flex; // use flexbox within each card
+    flex-direction: column; // stack the children vertically
+    align-items: center; // center the card's content horizontally
+    justify-content: center; // center the card's content vertically
+    text-align: center; // center text within the card
+    border-radius: 10px; // rounded corners for the card
+
+    h3 {
+      margin-bottom: 15px; // space below the title
+    }
+
+    img {
+      max-width: 80%; // make image responsive, taking up to 80% of the card's width
+      height: auto; // keep the aspect ratio of the image
+      margin-bottom: 15px; // space below the image
+    }
+
+    audio {
+      width: 100%; // audio player stretches the full width of the card
+      margin-top: 15px; // space above the audio player
+    }
+  }
+}

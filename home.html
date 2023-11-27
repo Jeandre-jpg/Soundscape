@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home
+    </title>
+
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet" href="styles/global/global.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  </head>
+  <body>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">Mighael Stoltz</a>
+      
+      </div>
+    </nav>
+  </header>
+
+  
+  <div class="row">
+    <div class="col-12">
+      <div id="background">     
+    		<div class="stars"> 
+  			<div class="twinkling">
+
+
+        <div class="row" style="margin-top: 100px;">
+          <div class="col-12">
+            <div class="quiz-container text-center" id="first-container">
+              <div class="row">
+                  <div class="col-6">
+                      <div class="profile-pic-wrapper">
+                          <img src="src/assets/icons/headers/test_header.jpg" class="profile-pic">
+                      </div>
+                      </div>
+                      <div class="col-6">
+                      <div class="quiz-info mt-4">
+                          <h1>Craft Your Auditory Adventure</h1>
+                          <h2 class="quiz-description">Immerse yourself in the art of sound.</h2>
+                            <p class="quiz-description">
+                              We invite you to weave a tapestry of sound by combining unique ambiances, characters, and scenes.</p>
+                              <p class="quiz-description">
+                               Are you ready to explore the limits of your imagination and hear the stories your choices will tell? Let your creativity soar and your ears be your guide</p>
+                          <button class="button" id="start-button">
+                            <span class="circle">
+                              <span class="arrow">&gt;</span> 
+                            </span>
+                            <span class="text">Let's go</span>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <div class="col-12">
+            <div class="quiz-container-q text-center" id="card1" style="display: none !important;">
+              <div class="row">
+                <div class="col-6">
+                  <div class="profile-pic-wrapper choose" id="image-display-card1">
+                    <img src="/src/assets/icons/amb_cave.jpg" class="profile-pic choose fade-in" id="dynamic-image-card1">
+                  </div>
+                    </div>
+                    <div class="col-6">
+                    <div class="quiz-info choose mt-4">
+                        <h1>Choose Your Ambience</h1>
+                          <p class="quiz-description">
+                            Select a card that sets the stage for your background sound environment</p>
+                            <div class="category" id="category1">
+                              <ul>
+                                <li><button onclick="selectOption('card2', 'Option 1', 'amb_cave.jpg', 'amb_cave.wav')">Cave</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 2', 'amb_dense_forest.jpg', 'amb_dense_forest.wav')">Dense Forest</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 3', 'amb_electric_planet.jpg', 'amb_electric_planet.wav')">Electric Planet</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 4', 'amb_infested_swamp.jpg', 'amb_infested_swamp.wav')">Infested Swamp</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 5', 'amb_lava_wasteland.jpg', 'amb_lava_wasteland.wav')">Lava Wasteland</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 6', 'amb_mars_wasteland.jpg', 'amb_mars_wasteland.wav')">Mars Wasteland</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 7', 'amb_spaceship.jpg', 'amb_spaceship.wav')">Spaceship</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 8', 'amb_stormy_weather.jpg', 'amb_stormy_weather.wav')">Stormy Weather</button></li>
+                                <!-- More options -->
+                              </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+           
+          </div>
+          </div>
+
+        
+          <div class="col-12">
+            <div class="quiz-container-q text-center" id="card2" style="display: none;">
+              <div class="row">
+                <div class="col-6">
+                  <div class="profile-pic-wrapper choose" id="image-display-card2">
+                    <img src="/src/assets/icons/char_alien.jpg" class="profile-pic choose fade-in" id="dynamic-image-card2">
+                  </div>
+                    </div>
+                    <div class="col-6">
+                    <div class="quiz-info mt-4 choose">
+                        <h1>Choose Your Character</h1>
+                          <p class="quiz-description">
+                            Choose a character that will add narrative and depth to your soundscape.</p>
+                            <div class="category" id="category1">
+                              <ul>
+                                <li><button onclick="selectOption('card3', 'Option 9', 'char_alien.jpg', 'char_alien.wav')">Alien</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 10', 'char_imp.jpg', 'char_imp.wav')">Imp</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 11', 'char_minotaur.jpg', 'char_minotaur.wav')">Minotaur</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 12', 'char_phoenix.jpg', 'char_phoenix.wav')">Phoenix</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 13', 'char_predator.jpg', 'char_predator.wav')">Predator</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 14', 'char_rock_golem.jpg', 'char_rock_golem.wav')">Rock Golem</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 15', 'char_wendigo.jpg', 'char_wendigo.wav')">Wendigo</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 16', 'char_werewolf.jpg', 'char_werewolf.wav')">Werewolf</button></li>
+                                <!-- More options -->
+                              </ul>
+                            </div>
+                      
+                    </div>
+                </div>
+            </div>
+           
+          </div>
+          </div>
+
+          <div class="col-12">
+            <div class="quiz-container-q text-center" id="card3" style="display: none;">
+              <div class="row">
+                <div class="col-6">
+                  <div class="profile-pic-wrapper choose" id="image-display-card3">
+                    <img src="/src/assets/icons/sce_gunfight.jpg" class="profile-pic choose fade-in" id="dynamic-image-card3">
+                  </div>
+                    </div>
+                    <div class="col-6">
+                    <div class="quiz-info mt-4 choose">
+                        <h1>Choose Your Scene</h1>
+                          <p class="quiz-description">
+                            Finalize your landscape with a scene that complements or contrasts your ambiance and character.</p>
+                            <div class="category" id="category1">
+                              <ul>
+                                <li><button onclick="selectOption('card4', 'Option 17', 'sce_gunfight.jpg', 'sce_gunfire_in_distance.wav')">Gunfight</button></li>
+                                <li><button onclick="selectOption('card4', 'Option 18', 'sce_helicopter_flying_overhead.jpg', 'sce_helicopter_flying_overhead.wav')">Helicopter</button></li>
+                                <li><button onclick="selectOption('card4', 'Option 19', 'sce_siren.jpg', 'sce_air_raid_siren_which_breaks.wav')">Siren</button></li>
+                                <!-- More options -->
+                              </ul>
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+           
+          </div>
+          </div>
+
+         
+          
+
+        </div>
+
+        <div id="results" class="results-container" style="display: none;">
+            <!-- Results will be dynamically added here -->
+        </div>
+        
+      </div>
+		</div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="/js/main.js"></script>
+  </body>
+
+
+<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</html>
