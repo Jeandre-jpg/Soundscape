@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
 @font-face {
   font-family: "Elephnt";
   src: url("/styles/typography/ELEPHNT.TTF") format("truetype");
@@ -9,6 +11,14 @@
 @font-face {
   font-family: "AzeretMono-ExtraBold";
   src: url("/styles/typography/static/AzeretMono-ExtraBold.ttf") format("truetype");
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 * {
   box-sizing: border-box;
@@ -171,7 +181,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
 
 .quiz-info {
   padding: 20px;
-  margin-top: 150px;
+  margin-top: 200px;
   width: 100%;
   height: 450px;
   justify-content: space-between;
@@ -245,6 +255,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   border-radius: 50%;
   transition: width 0.3s ease-out, border-radius 0.3s ease-out;
   z-index: 0;
+  animation: pulse-border 1500ms ease-out infinite;
   margin-left: -75px;
 }
 
@@ -263,7 +274,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
 }
 
 .button:hover .arrow {
-  transform: translateX(100%); /* Move the arrow to the right on hover */
+  display: none;
 }
 
 .button:hover .text {
@@ -376,9 +387,14 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
 
 #controls-container {
   display: flex;
+  position: absolute;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: -3%;
+  z-index: 1000;
   border-radius: 100px;
   background-color: #252525;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -387,5 +403,166 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   background: none;
   border: none;
   font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+#controls-container #kill-switch {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+#controls-container #play-all-button {
+  content: "Play All";
+  border: none;
+  position: relative;
+  z-index: 10;
+  top: 50%;
+  left: 5%;
+  transform: translateX(-50%) translateY(-50%);
+  box-sizing: content-box;
+  display: block;
+  width: 0px;
+  height: 0px;
+  background: #fa183d;
+  border-radius: 50%;
+  padding: 20px;
+  margin-top: 25px !important;
+}
+#controls-container #play-all-button:before {
+  content: "";
+  position: relative;
+  z-index: 0;
+  left: 5%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: #ff4c60;
+  border-radius: 50%;
+  padding: 20px;
+  margin-top: 0px;
+  animation: pulse-border 1500ms ease-out infinite;
+}
+#controls-container #play-all-button:after {
+  content: "All";
+  position: absolute;
+  z-index: 1;
+  margin-top: 0px;
+  margin-left: 17px;
+  left: 5%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  width: 30px;
+  border-left: 100px solid transparent;
+  height: 30px;
+  font-family: "AzeretMono-Light", sans-serif;
+  color: #cfb7ac;
+  border-top: 10px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-radius: 50%;
+  transition: all 200ms;
+  padding: 20px;
+}
+#controls-container #play-all-button:hover:after {
+  background-color: #f1ad34;
+  border-top: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: 0px solid transparent;
+}
+
+@keyframes pulse-border {
+  0% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+    opacity: 0;
+  }
+}
+#play-pause-button {
+  content: "▶";
+  display: block;
+  width: 0;
+  height: 0;
+  margin-top: -40px;
+  margin-left: 17px;
+  background-size: cover;
+  background-position: center;
+  background: #000;
+  left: 5%;
+  z-index: 1;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  left: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1100; /* Higher than anything else on the page */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.6); /* Dim the background more */
+}
+.modal.show {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #46260F;
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 20px;
+  justify-content: center;
+  width: 25%; /* Adjust as necessary */
+  z-index: 1001; /* Above the overlay */
+  animation: fadeIn 0.5s;
+}
+
+.killswitch {
+  max-width: 100%;
+  height: auto;
+  width: 350px;
+  margin-left: 5%;
+  margin-top: -30px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.explore-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.explore-button:hover {
+  background-color: #0062cc;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
 }/*# sourceMappingURL=global.css.map */

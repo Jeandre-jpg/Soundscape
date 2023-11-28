@@ -32,13 +32,13 @@
   			<div class="twinkling">
 
 
-        <div class="row" style="margin-top: 100px;">
+        <div class="row" >
           <div class="col-12">
-            <div class="quiz-container text-center" id="first-container">
+            <div class="quiz-container text-center" id="first-container" style="margin-top:150px;">
               <div class="row">
                   <div class="col-6">
                       <div class="profile-pic-wrapper">
-                          <img src="src/assets/icons/headers/test_header.jpg" class="profile-pic">
+                          <img src="src/assets/icons/headers/Soundscape_shuffle.jpg" class="profile-pic">
                       </div>
                       </div>
                       <div class="col-6">
@@ -62,7 +62,7 @@
           </div>
 
           <div class="col-12">
-            <div class="quiz-container-q text-center" id="card1" style="display: none !important;">
+            <div class="quiz-container-q text-center" id="card1" style="display: none !important; margin-top: 80px;">
               <div class="row">
                 <div class="col-6">
                   <div class="profile-pic-wrapper choose" id="image-display-card1">
@@ -81,7 +81,7 @@
                                 <li><button onclick="selectOption('card2', 'Option 3', 'amb_electric_planet.jpg', 'amb_electric_planet.wav')">Electric Planet</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 4', 'amb_infested_swamp.jpg', 'amb_bug_infested_swamp.wav')">Infested Swamp</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 5', 'amb_lava_wasteland.jpg', 'amb_lava_wasteland.wav')">Lava Wasteland</button></li>
-                                <li><button onclick="selectOption('card2', 'Option 6', 'amb_mars_wasteland.jpg', 'amb_mars_wasteland.wav')">Mars Wasteland</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 6', 'amb_mars_wasteland.jpg', 'amb_mars_desertscape.wav')">Mars Wasteland</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 7', 'amb_spaceship.jpg', 'amb_spaceship.wav')">Spaceship</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 8', 'amb_stormy_weather.jpg', 'amb_stormy_weather.wav')">Stormy Weather</button></li>
                                 <!-- More options -->
@@ -96,7 +96,7 @@
 
         
           <div class="col-12">
-            <div class="quiz-container-q text-center" id="card2" style="display: none;">
+            <div class="quiz-container-q text-center" id="card2" style="display: none; margin-top: 80px;">
               <div class="row">
                 <div class="col-6">
                   <div class="profile-pic-wrapper choose" id="image-display-card2">
@@ -111,7 +111,7 @@
                             <div class="category" id="category1">
                               <ul>
                                 <li><button onclick="selectOption('card3', 'Option 9', 'char_alien.jpg', 'char_alien.wav')">Alien</button></li>
-                                <li><button onclick="selectOption('card3', 'Option 10', 'char_imp.jpg', 'char_underword_imp.wav')">Imp</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 10', 'char_imp.jpg', 'char_underworld_imp.wav')">Imp</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 11', 'char_minotaur.jpg', 'char_minotaur.wav')">Minotaur</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 12', 'char_phoenix.jpg', 'char_phoenix.wav')">Phoenix</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 13', 'char_predator.jpg', 'char_predator.wav')">Predator</button></li>
@@ -130,7 +130,7 @@
           </div>
 
           <div class="col-12">
-            <div class="quiz-container-q text-center" id="card3" style="display: none;">
+            <div class="quiz-container-q text-center" id="card3" style="display: none; margin-top: 80px;">
               <div class="row">
                 <div class="col-6">
                   <div class="profile-pic-wrapper choose" id="image-display-card3">
@@ -163,13 +163,20 @@
 
         </div>
 
-        <div id="results" style="display: none;"></div>
-        <div id="controls-container">
-          <div id="audio-visualizer-container">
-          </div>
-        </div>
-       
         
+        <div id="results" style="display: none; margin-top: 80px;">
+        </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <img src="/src/assets/icons/sce_killswitch.jpg" class="killswitch">
+              <button id="exploreButton" class="explore-button">Explore</button>
+          </div>
+      </div>
+        <div id="audio-visualizer-container" style="display: none;"></div>
+        <div id="controls-container" style="display: none;"></div>
+
+       
         
       </div>
 		</div>

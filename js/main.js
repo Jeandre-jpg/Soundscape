@@ -67,14 +67,16 @@ function startImageLoop(images, imageElementId) {
 function togglePlayPause() {
   if (audioContext.state === 'suspended') {
     audioContext.resume().then(() => {
-      document.getElementById('play-pause-button').textContent = 'Pause';
+      document.getElementById('play-pause-button').textContent = '❚❚';
     });
   } else {
     audioContext.suspend().then(() => {
-      document.getElementById('play-pause-button').textContent = 'Play';
+      document.getElementById('play-pause-button').textContent = '▶';
     });
   }
 }
+
+
 
 function stopAllAudio() {
   audioSources.forEach(source => {
@@ -93,11 +95,86 @@ let audioSources = [];
 // Call setupAudioControls after DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   setupAudioControls();
-  // ... other initialization code ...
 });
 
 document.addEventListener('DOMContentLoaded', function() {
   showResults();
+
+  var exploreButton = document.getElementById('exploreButton');
+  if (exploreButton) {
+    exploreButton.addEventListener('click', function() {
+      // Hide the modal
+      hideModal();
+
+      // Get the first container element
+      var firstContainer = document.getElementById('firstContainer');
+      if (firstContainer) {
+        // Scroll to the first container
+        firstContainer.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        console.error('Element with ID "firstContainer" not found.');
+      }
+    });
+  } else {
+    console.error('Explore button not found.');
+  }
+
+
+  var modal = document.getElementById('myModal');
+  var span = document.getElementsByClassName('close')[0];
+
+  document.getElementById('kill-switch').addEventListener('click', function() {
+    modal.style.display = 'block';
+    stopAllAudio(); // existing functionality to stop all audio
+  });
+
+  span.onclick = function() {
+    modal.style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  function showModal() {
+    var modal = document.getElementById('myModal');
+    modal.classList.add('show');
+  }
+  
+  // Function to hide the modal
+  function hideModal() {
+    var modal = document.getElementById('myModal');
+    modal.classList.remove('show');
+  }
+
+  document.getElementById('exploreButton').addEventListener('click', function() {
+    hideModal();
+
+    var firstContainer = document.getElementById('firstContainer');
+    if (firstContainer) {
+      firstContainer.scrollIntoView({
+        behavior: 'smooth'
+      });
+    } else {
+      console.error('Element with ID "firstContainer" not found.');
+    }
+  });
+
+
+  document.querySelector('.modal .close').addEventListener('click', hideModal);
+
+// Event listener to hide modal if clicked outside of it
+window.addEventListener('click', function(event) {
+  var modal = document.getElementById('myModal');
+  if (event.target == modal) {
+    hideModal();
+  }
+});
 
   document.getElementById('first-container').style.display = 'block';
   document.getElementById('start-button').addEventListener('click', function() {
@@ -105,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('card1').style.display = 'block';
     startImageLoop(card1Images, 'dynamic-image-card1');
   });
-
 
   const visualizerContainer = document.getElementById('audio-visualizer-container');
   if (!visualizerContainer) {
@@ -118,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
   visualizer.innerHTML = '<div class="progress"></div>';
   visualizerContainer.appendChild(visualizer);
 
-  setupAudioControls();
+ 
 
   document.getElementById('play-all-button').addEventListener('click', () => {
     if (selections.length === 0) {
@@ -146,37 +222,61 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  
-  function stopAllAudio() {
-    audioSources.forEach(source => {
-      source.source.stop();
-      source.gainNode.disconnect();
-    });
-    audioSources = [];
-  }
-  
 
+  document.getElementById('kill-switch').addEventListener('click', () => {
+    function stopAllAudio() {
+      audioSources.forEach(source => {
+        source.source.stop();
+        source.gainNode.disconnect();
+      });
+      audioSources = [];
+    }
+  });
+
+  document.getElementById('play-button').addEventListener('click', () => {
+    if (selections.length === 0) {
+      console.warn('No selections have been made. Cannot play sounds.');
+      return;
+    }
+
+    playSounds(selections);
+  });
+  
+  
+  
 function setupAudioControls() {
+
+  document.getElementById('controls-container').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+
   const controlsContainer = document.getElementById('controls-container');
 
   // Create play/pause button
   const playPauseButton = document.createElement('button');
   playPauseButton.id = 'play-pause-button';
-  playPauseButton.innerHTML = '▶️';
+  playPauseButton.innerHTML = '❚❚';
+  playPauseButton.style.display ="flex";
   controlsContainer.appendChild(playPauseButton);
-
-
   playPauseButton.addEventListener('click', togglePlayPause);
 
   // Create kill switch button
   const killSwitch = document.createElement('button');
-  killSwitch.innerText = 'Stop and Reset';
+  killSwitch.innerHTML = '☠️';
   killSwitch.id = 'kill-switch';
   killSwitch.addEventListener('click', stopAllAudio);
 
+  const playAllButton = document.createElement('button');
+  playAllButton.innerHTML = '';
+  playAllButton.style.display = "flex";
+  playAllButton.style.textAlign = "center";
+  playAllButton.id = 'play-all-button';
+  playAllButton.addEventListener('click', () => playSounds(selections));
+
   // Append buttons to the container
+  controlsContainer.appendChild(playAllButton)
   controlsContainer.appendChild(playPauseButton);
   controlsContainer.appendChild(killSwitch);
+  ;
 }
 
 function selectOption(nextCardId, optionName, imageName, soundFileName) {
@@ -191,27 +291,27 @@ function selectOption(nextCardId, optionName, imageName, soundFileName) {
   if (nextCardId) {
     const nextCard = document.getElementById(nextCardId);
     if (nextCard) {
-      nextCard.style.display = 'block';
-      switch (nextCardId) {
-        case 'card1': startImageLoop(card1Images, 'dynamic-image-card1'); break;
-        case 'card2': startImageLoop(card2Images, 'dynamic-image-card2'); break;
-        case 'card3': startImageLoop(card3Images, 'dynamic-image-card3'); break;
-      }
+        nextCard.style.display = 'block';
+        switch (nextCardId) {
+            case 'card1': startImageLoop(card1Images, 'dynamic-image-card1'); break;
+            case 'card2': startImageLoop(card2Images, 'dynamic-image-card2'); break;
+            case 'card3': startImageLoop(card3Images, 'dynamic-image-card3'); break;
+        }
     } 
-    if (selections.length === 0) {
-      console.warn('No selections to show.');
-      return;
-    }
-    showResults();
+}
+    // Check if all three options have been chosen
+    if (selections.length === 3) {
+      showResults();
   }
 }
-
 
 function showResults() {
   console.log('showResults called');
 
   const resultsContainer = document.getElementById('results');
   const visualizerContainer = document.getElementById('audio-visualizer-container');
+  const controlsContainer = document.getElementById('controls-container');
+
 
   console.log('Results container:', resultsContainer);
   console.log('Visualizer container:', visualizerContainer);
@@ -232,6 +332,7 @@ function showResults() {
   visualizerContainer.innerHTML = '';
   resultsContainer.innerHTML = ''; // Clear previous results
   resultsContainer.style.display = 'flex'; // Make sure it's visible
+  controlsContainer.style.display = 'flex'; 
 
   selections.forEach(selection => {
     console.log('Creating result for:', selection);
@@ -249,41 +350,14 @@ function showResults() {
     resultsContainer.appendChild(resultElement);
   });
 
-
-
-  function togglePlayPause() {
-    if (audioContext.state === 'suspended') {
-      audioContext.resume().then(() => {
-        document.getElementById('play-pause-button').textContent = 'Pause';
-      });
-    } else {
-      audioContext.suspend().then(() => {
-        document.getElementById('play-pause-button').textContent = 'Play';
-      });
-    }
+   
   }
-
-    const playAllButton = document.createElement('button');
-    playAllButton.innerText = 'Play All';
-    playAllButton.id = 'play-all-button';
-    visualizerContainer.appendChild(playAllButton);
-    visualizerContainer.style.display = 'block'; // Make visualizer container visible
-  
-    playAllButton.addEventListener('click', () => playSounds(selections));
-  }
-
-
-document.getElementById('kill-switch').addEventListener('click', () => {
-  // Your kill switch logic here
-});
 
   async function playSounds(selections) {
     if (!audioContext) {
       console.error('Audio context not supported');
       return;
     }
-  
-    // Clear any previous sounds.
     stopAllAudio();
   
     try {
@@ -320,14 +394,5 @@ document.getElementById('kill-switch').addEventListener('click', () => {
   
  
 
-document.getElementById('play-button').addEventListener('click', () => {
-  // Make sure selections have been made
-  if (selections.length === 0) {
-    console.warn('No selections have been made. Cannot play sounds.');
-    return;
-  }
 
-  // Call playSounds to start playback
-  playSounds(selections);
-});
 
