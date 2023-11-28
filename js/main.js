@@ -64,17 +64,120 @@ function startImageLoop(images, imageElementId) {
   }, 1500); 
 }
 
+function togglePlayPause() {
+  if (audioContext.state === 'suspended') {
+    audioContext.resume().then(() => {
+      document.getElementById('play-pause-button').textContent = 'Pause';
+    });
+  } else {
+    audioContext.suspend().then(() => {
+      document.getElementById('play-pause-button').textContent = 'Play';
+    });
+  }
+}
+
+function stopAllAudio() {
+  audioSources.forEach(source => {
+    if (source.source) {
+      source.source.stop();
+      source.gainNode.disconnect();
+    }
+  });
+  audioSources = [];
+}
+
 let selections = [];
+let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioSources = []; 
+
+// Call setupAudioControls after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  setupAudioControls();
+  // ... other initialization code ...
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   showResults();
+
   document.getElementById('first-container').style.display = 'block';
   document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('first-container').style.display = 'none';
     document.getElementById('card1').style.display = 'block';
     startImageLoop(card1Images, 'dynamic-image-card1');
   });
+
+
+  const visualizerContainer = document.getElementById('audio-visualizer-container');
+  if (!visualizerContainer) {
+    console.error('The audio visualizer container was not found in the DOM.');
+    return;
+  }
+
+  const visualizer = document.createElement('div');
+  visualizer.className = 'audio-visualizer';
+  visualizer.innerHTML = '<div class="progress"></div>';
+  visualizerContainer.appendChild(visualizer);
+
+  setupAudioControls();
+
+  document.getElementById('play-all-button').addEventListener('click', () => {
+    if (selections.length === 0) {
+      console.warn('No selections have been made. Cannot play sounds.');
+      return;
+    }
+    playSounds(selections);
+  });
+
 });
+
+  // Event listeners for controls
+  document.getElementById('play-pause-button').addEventListener('click', () => {
+    function togglePlayPause() {
+      if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+          console.log("Playback resumed successfully");
+          playPauseButton.textContent = 'Pause'; // Update button text to 'Pause'
+        });
+      } else {
+        audioContext.suspend().then(() => {
+          console.log("Playback suspended successfully");
+          playPauseButton.textContent = 'Play'; // Update button text to 'Play'
+        });
+      }
+    }
+  });
+  
+  function stopAllAudio() {
+    audioSources.forEach(source => {
+      source.source.stop();
+      source.gainNode.disconnect();
+    });
+    audioSources = [];
+  }
+  
+
+function setupAudioControls() {
+  const controlsContainer = document.getElementById('controls-container');
+
+  // Create play/pause button
+  const playPauseButton = document.createElement('button');
+  playPauseButton.id = 'play-pause-button';
+  playPauseButton.innerHTML = '▶️';
+  controlsContainer.appendChild(playPauseButton);
+
+
+  playPauseButton.addEventListener('click', togglePlayPause);
+
+  // Create kill switch button
+  const killSwitch = document.createElement('button');
+  killSwitch.innerText = 'Stop and Reset';
+  killSwitch.id = 'kill-switch';
+  killSwitch.addEventListener('click', stopAllAudio);
+
+  // Append buttons to the container
+  controlsContainer.appendChild(playPauseButton);
+  controlsContainer.appendChild(killSwitch);
+}
 
 function selectOption(nextCardId, optionName, imageName, soundFileName) {
   selections.push({ optionName, imageName, soundFileName });
@@ -103,39 +206,30 @@ function selectOption(nextCardId, optionName, imageName, soundFileName) {
   }
 }
 
-// function testShowResults() {
-//   // Test data
-//   selections = [
-//     { optionName: 'Test Option 1', imageName: 'test1.jpg', soundFileName: 'test1.wav' },
-//     { optionName: 'Test Option 2', imageName: 'test2.jpg', soundFileName: 'test2.wav' }
-//   ];
-
-//   showResults();
-// }
-
-// Call this function when the DOM is fully loaded to test
-document.addEventListener('DOMContentLoaded', testShowResults);
-
 
 function showResults() {
   console.log('showResults called');
 
   const resultsContainer = document.getElementById('results');
-  if (!resultsContainer) {
-    console.error('Results container not found');
+  const visualizerContainer = document.getElementById('audio-visualizer-container');
+
+  console.log('Results container:', resultsContainer);
+  console.log('Visualizer container:', visualizerContainer);
+
+  if (!resultsContainer || !visualizerContainer) {
+    console.error('One or more containers not found');
     return;
   }
-  console.log('Results container found:', resultsContainer);
 
   if (selections.length === 0) {
     console.warn('Selections array is empty.');
     resultsContainer.innerHTML = '<p>No selections have been made.</p>';
     return;
   }
-  
 
   console.log('Current selections:', selections);
-
+  
+  visualizerContainer.innerHTML = '';
   resultsContainer.innerHTML = ''; // Clear previous results
   resultsContainer.style.display = 'flex'; // Make sure it's visible
 
@@ -145,52 +239,95 @@ function showResults() {
     const resultElement = document.createElement('div');
     resultElement.classList.add('result-card');
     resultElement.innerHTML = `
-      <h3>${selection.optionName}</h3>
       <img src="src/assets/icons/${selection.imageName}" alt="${selection.optionName}" class="result-image">
-      <audio controls>
+      <audio controls controlsList="nodownload noplaybackrate">
         <source src="src/assets/sounds/${selection.soundFileName}" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     `;
 
     resultsContainer.appendChild(resultElement);
-    console.log('Created result element:', resultElement);
   });
-}
 
 
 
+  function togglePlayPause() {
+    if (audioContext.state === 'suspended') {
+      audioContext.resume().then(() => {
+        document.getElementById('play-pause-button').textContent = 'Pause';
+      });
+    } else {
+      audioContext.suspend().then(() => {
+        document.getElementById('play-pause-button').textContent = 'Play';
+      });
+    }
+  }
 
-// function showResults() {
-//   try {
-//     console.log('showResults called');
-//     console.log('Selections:', selections);
+    const playAllButton = document.createElement('button');
+    playAllButton.innerText = 'Play All';
+    playAllButton.id = 'play-all-button';
+    visualizerContainer.appendChild(playAllButton);
+    visualizerContainer.style.display = 'block'; // Make visualizer container visible
+  
+    playAllButton.addEventListener('click', () => playSounds(selections));
+  }
 
-//     const resultsContainer = document.getElementById('results');
-//     if (!resultsContainer) {
-//       console.error('Results container not found');
-//       return;
-//     }
 
-//     // Clear previous results and make the container visible
-//     resultsContainer.innerHTML = '';
-//     resultsContainer.style.display = 'block'; // Make sure the container is visible
+document.getElementById('kill-switch').addEventListener('click', () => {
+  // Your kill switch logic here
+});
 
-//     // Iterate over selections and create result elements
-//     selections.forEach(selection => {
-//       const resultElement = document.createElement('div');
-//       resultElement.classList.add('result-card');
-//       resultElement.innerHTML = `
-//         <h3>${selection.optionName}</h3>
-//         <img src="src/assets/icons/${selection.imageName}" alt="${selection.optionName}" class="result-image">
-//         <audio controls>
-//           <source src="src/assets/sounds/${selection.soundFileName}" type="audio/mpeg">
-//           Your browser does not support the audio element.
-//         </audio>
-//       `;
-//       resultsContainer.appendChild(resultElement);
-//     });
-//   } catch (error) {
-//     console.error('Error in showResults:', error);
-//   }
-// }
+  async function playSounds(selections) {
+    if (!audioContext) {
+      console.error('Audio context not supported');
+      return;
+    }
+  
+    // Clear any previous sounds.
+    stopAllAudio();
+  
+    try {
+      // Fetch and decode all audio files, then play them.
+      const audioBuffers = await Promise.all(
+        selections.map(selection => fetchAndDecodeAudio(`src/assets/sounds/${selection.soundFileName}`))
+      );
+  
+      audioBuffers.forEach(buffer => {
+        playAudioBuffer(buffer);
+      });
+    } catch (error) {
+      console.error('Error during audio playback:', error);
+    }
+  }
+  
+  async function fetchAndDecodeAudio(url) {
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    return audioContext.decodeAudioData(arrayBuffer);
+  }
+  
+  function playAudioBuffer(audioBuffer) {
+    const sourceNode = audioContext.createBufferSource();
+    sourceNode.buffer = audioBuffer;
+    
+    const gainNode = audioContext.createGain();
+    sourceNode.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    sourceNode.start();
+    audioSources.push({ source: sourceNode, gainNode: gainNode });
+  }
+  
+ 
+
+document.getElementById('play-button').addEventListener('click', () => {
+  // Make sure selections have been made
+  if (selections.length === 0) {
+    console.warn('No selections have been made. Cannot play sounds.');
+    return;
+  }
+
+  // Call playSounds to start playback
+  playSounds(selections);
+});
+

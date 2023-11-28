@@ -202,7 +202,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   border-radius: 12px;
   width: 550px;
   height: 425px;
-  justify-content: center; /* Center horizontally */
+  justify-content: center;
   align-items: center;
   margin-left: 5%;
   margin-top: 5%;
@@ -321,22 +321,12 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   opacity: 0; /* Fully transparent */
 }
 
-.result-image {
-  /* Style for the images in the result cards */
-  max-width: 100px; /* Example size, adjust as needed */
-  margin: 10px;
-}
-
-audio {
-  /* Style for the audio player if needed */
-  margin: 10px;
-}
-
-.results-container {
+#results {
   background: #0e1111;
   background-size: cover;
   z-index: 5;
   position: relative;
+  height: 80%;
   padding: 12px;
   max-width: 1300px;
   margin: 20px auto;
@@ -347,11 +337,9 @@ audio {
   border-radius: 20px;
   color: #fff;
 }
-.results-container .result-card {
+#results .result-card {
   flex: 0 1 30%;
-  border: 1px solid #ddd;
   margin: 10px;
-  padding: 15px;
   background-color: #252525;
   color: #fff;
   display: flex;
@@ -360,16 +348,44 @@ audio {
   justify-content: center;
   text-align: center;
   border-radius: 10px;
+  margin-top: -50px;
 }
-.results-container .result-card h3 {
-  margin-bottom: 15px;
-}
-.results-container .result-card img {
-  max-width: 80%;
+#results .result-card img {
+  max-width: 100%;
   height: auto;
   margin-bottom: 15px;
+  border-radius: 10px;
 }
-.results-container .result-card audio {
-  width: 100%;
-  margin-top: 15px;
+#results .result-card audio {
+  width: 70%;
+  margin-top: -100px;
+}
+
+#audio-visualizer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  background-color: #252525;
+  color: #fff;
+  border-radius: 10px;
+  margin-left: 15%;
+  z-index: 100;
+}
+
+#controls-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: #252525;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+#controls-container #play-pause-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }/*# sourceMappingURL=global.css.map */

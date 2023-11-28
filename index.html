@@ -18,7 +18,8 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="#">Mighael Stoltz</a>
-      
+        <a class="navbar-brand" href="#">Sound Design 300</a>
+        <a class="navbar-brand" href="#">Own Brief Project</a>
       </div>
     </nav>
   </header>
@@ -78,7 +79,7 @@
                                 <li><button onclick="selectOption('card2', 'Option 1', 'amb_cave.jpg', 'amb_cave.wav')">Cave</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 2', 'amb_dense_forest.jpg', 'amb_dense_forest.wav')">Dense Forest</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 3', 'amb_electric_planet.jpg', 'amb_electric_planet.wav')">Electric Planet</button></li>
-                                <li><button onclick="selectOption('card2', 'Option 4', 'amb_infested_swamp.jpg', 'amb_infested_swamp.wav')">Infested Swamp</button></li>
+                                <li><button onclick="selectOption('card2', 'Option 4', 'amb_infested_swamp.jpg', 'amb_bug_infested_swamp.wav')">Infested Swamp</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 5', 'amb_lava_wasteland.jpg', 'amb_lava_wasteland.wav')">Lava Wasteland</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 6', 'amb_mars_wasteland.jpg', 'amb_mars_wasteland.wav')">Mars Wasteland</button></li>
                                 <li><button onclick="selectOption('card2', 'Option 7', 'amb_spaceship.jpg', 'amb_spaceship.wav')">Spaceship</button></li>
@@ -110,7 +111,7 @@
                             <div class="category" id="category1">
                               <ul>
                                 <li><button onclick="selectOption('card3', 'Option 9', 'char_alien.jpg', 'char_alien.wav')">Alien</button></li>
-                                <li><button onclick="selectOption('card3', 'Option 10', 'char_imp.jpg', 'char_imp.wav')">Imp</button></li>
+                                <li><button onclick="selectOption('card3', 'Option 10', 'char_imp.jpg', 'char_underword_imp.wav')">Imp</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 11', 'char_minotaur.jpg', 'char_minotaur.wav')">Minotaur</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 12', 'char_phoenix.jpg', 'char_phoenix.wav')">Phoenix</button></li>
                                 <li><button onclick="selectOption('card3', 'Option 13', 'char_predator.jpg', 'char_predator.wav')">Predator</button></li>
@@ -144,7 +145,7 @@
                             <div class="category" id="category1">
                               <ul>
                                 <li><button onclick="selectOption('card4', 'Option 17', 'sce_gunfight.jpg', 'sce_gunfire_in_distance.wav')">Gunfight</button></li>
-                                <li><button onclick="selectOption('card4', 'Option 18', 'sce_helicopter_flying_overhead.jpg', 'sce_helicopter_flying_overhead.wav')">Helicopter</button></li>
+                                <li><button onclick="selectOption('card4', 'Option 18', 'sce_helicopter.jpg', 'sce_helicopter_flying_overhead.wav')">Helicopter</button></li>
                                 <li><button onclick="selectOption('card4', 'Option 19', 'sce_siren.jpg', 'sce_air_raid_siren_which_breaks.wav')">Siren</button></li>
                                 <!-- More options -->
                               </ul>
@@ -162,9 +163,13 @@
 
         </div>
 
-        <div id="results" class="results-container" style="display: none;">
-            <!-- Results will be dynamically added here -->
+        <div id="results" style="display: none;"></div>
+        <div id="controls-container">
+          <div id="audio-visualizer-container">
+          </div>
         </div>
+       
+        
         
       </div>
 		</div>
