@@ -46,6 +46,53 @@ function changeImageSmoothly(imageElement, newSrc) {
 }
 
 
+function showModal() {
+  var modal = document.getElementById('myModal');
+  modal.classList.add('show');
+}
+
+function hideResults() {
+  var resultsContainer = document.getElementById('results');
+  if (resultsContainer) {
+    resultsContainer.style.display = 'none';
+  } else {
+    console.error('Results container element not found.');
+  }
+}
+
+function hideModal() {
+  var modal = document.getElementById('myModal');
+  if (modal) {
+    modal.style.display = 'none';
+  } else {
+    console.error('Modal element not found.');
+  }
+}
+
+function showFirstContainerAndHideCards() {
+  hideResults();
+  hideModal();
+  const cardIds = ['card1', 'card2', 'card3']; // Use the exact IDs of your cards
+  cardIds.forEach(id => {
+    const card = document.getElementById(id);
+    if (card) {
+      card.style.display = 'none';
+    }
+  });
+
+  // Show the first container
+  const firstContainer = document.getElementById('first-container');
+  if (firstContainer) {
+    firstContainer.style.display = 'block'; // Make sure 'block' is the correct display style
+    firstContainer.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else {
+    console.error('Element with ID "firstContainer" not found.');
+  }
+}
+
 function startImageLoop(images, imageElementId) {
   const imageElement = document.getElementById(imageElementId);
   if (!images || images.length === 0 || !imageElement) {
@@ -100,23 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function() {
   showResults();
 
-  var exploreButton = document.getElementById('exploreButton');
+  const exploreButton = document.getElementById('exploreButton');
   if (exploreButton) {
     exploreButton.addEventListener('click', function() {
-      // Hide the modal
-      hideModal();
-
-      // Get the first container element
-      var firstContainer = document.getElementById('firstContainer');
-      if (firstContainer) {
-        // Scroll to the first container
-        firstContainer.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      } else {
-        console.error('Element with ID "firstContainer" not found.');
-      }
+      // Reload the current page
+      document.body.classList.add('fadeOut');
+      setTimeout(function() {
+        location.reload();
+      }, 500); 
     });
   } else {
     console.error('Explore button not found.');
@@ -141,29 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function showModal() {
-    var modal = document.getElementById('myModal');
-    modal.classList.add('show');
-  }
-  
-  // Function to hide the modal
-  function hideModal() {
-    var modal = document.getElementById('myModal');
-    modal.classList.remove('show');
-  }
 
-  document.getElementById('exploreButton').addEventListener('click', function() {
-    hideModal();
 
-    var firstContainer = document.getElementById('firstContainer');
-    if (firstContainer) {
-      firstContainer.scrollIntoView({
-        behavior: 'smooth'
-      });
-    } else {
-      console.error('Element with ID "firstContainer" not found.');
-    }
-  });
+
 
 
   document.querySelector('.modal .close').addEventListener('click', hideModal);
@@ -261,8 +279,9 @@ function setupAudioControls() {
 
   // Create kill switch button
   const killSwitch = document.createElement('button');
-  killSwitch.innerHTML = '☠️';
+  killSwitch.innerHTML = '☠️ Restart';
   killSwitch.id = 'kill-switch';
+  killSwitch.style.color = '#cfb7ac;';
   killSwitch.addEventListener('click', stopAllAudio);
 
   const playAllButton = document.createElement('button');

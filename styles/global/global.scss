@@ -60,6 +60,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   align-items: center; /* Center vertically */
   min-height: 100vh; /* Full viewport height */
   margin: 0; /* Reset default margin */
+  overflow: hidden;
 }
 
 
@@ -426,7 +427,8 @@ animation:move-twink-back 200s linear infinite;
 
     audio {
       width: 70%; 
-      margin-top: -100px; 
+      margin-top: -110px; 
+      align-items: center;
     }
 
     
@@ -475,10 +477,13 @@ animation:move-twink-back 200s linear infinite;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    font-family: 'AzeretMono-Light', sans-serif;
+    color: #cfb7ac;
+    font-size: 15px;
   }
 
   #play-all-button{
-    content: "Play All";
+    content: "▶ Play all";
     border: none;
     position: relative;
     z-index: 10;
@@ -489,7 +494,8 @@ animation:move-twink-back 200s linear infinite;
     display: block;
     width: 0px;
     height: 0px;
-    background: #fa183d; 
+    background: #aaa; 
+    font-size: 15px;
     border-radius: 50%;
     padding:20px;
     margin-top: 25px !important;
@@ -504,7 +510,7 @@ animation:move-twink-back 200s linear infinite;
       display: block;
       width: 30px;
       height: 30px;
-      background: #ff4c60;
+      background: #aaa;
       border-radius: 50%;
       padding:20px;
       margin-top: 0px;
@@ -512,7 +518,7 @@ animation:move-twink-back 200s linear infinite;
     }
 
     &:after {
-      content: "All";
+      content: "Play all";
       position: absolute;
       z-index: 1;
       margin-top: 0px;
@@ -536,7 +542,7 @@ animation:move-twink-back 200s linear infinite;
 
     &:hover:after {
     
-      background-color: #f1ad34;
+      background-color: #46260F;
       border-top: 0px solid transparent;
       border-bottom: 0px solid transparent;
       border-left: 0px solid transparent;
@@ -598,45 +604,60 @@ animation:move-twink-back 200s linear infinite;
 .modal-content {
   position: relative;
   background-color: #46260F;
-  margin: 10% auto; /* 10% from the top and centered */
+  margin: 10% auto;
   padding: 20px;
   justify-content: center;
-
-  width: 25%; /* Adjust as necessary */
-  z-index: 1001; /* Above the overlay */
+  height: 600px;
+  width: 25%; 
+  z-index: 1001;
   animation: fadeIn 0.5s;
+  background-image: url(/src/assets/icons/sce_killswitch.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .killswitch{
+ 
   max-width: 100%; 
-  height: auto; 
+  height: 60px; 
   width: 350px;
   margin-left:5%;
-  margin-top: -30px;
   margin-bottom: 15px; 
   border-radius: 10px;
+}
+
+.btn-group{
+  display: grid;
+  margin-top: 5%;
+  justify-content: center;
+  width: 100%;
+  gap: 350px;
 }
 
 .explore-button {
   // Add your styles here
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #46260F;
   color: white;
+  width: 250px;
+ 
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; // Spacing from the other content in the modal
+
 
   &:hover {
-    background-color: darken(#007bff, 10%);
+    background-color: darken(#CCB58B, 10%);
   }
 }
 
 
 .close {
   color: #aaa;
-  float: right;
+  float: left;
   font-size: 28px;
+  margin-top: -75px;
+  margin-bottom: 50px;
   font-weight: bold;
 }
 
@@ -645,4 +666,17 @@ animation:move-twink-back 200s linear infinite;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
 }

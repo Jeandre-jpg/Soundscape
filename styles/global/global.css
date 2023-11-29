@@ -43,6 +43,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   align-items: center; /* Center vertically */
   min-height: 100vh; /* Full viewport height */
   margin: 0; /* Reset default margin */
+  overflow: hidden;
 }
 
 .stars, .twinkling {
@@ -369,7 +370,8 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
 }
 #results .result-card audio {
   width: 70%;
-  margin-top: -100px;
+  margin-top: -110px;
+  align-items: center;
 }
 
 #audio-visualizer-container {
@@ -411,9 +413,12 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   border: none;
   font-size: 20px;
   cursor: pointer;
+  font-family: "AzeretMono-Light", sans-serif;
+  color: #cfb7ac;
+  font-size: 15px;
 }
 #controls-container #play-all-button {
-  content: "Play All";
+  content: "▶ Play all";
   border: none;
   position: relative;
   z-index: 10;
@@ -424,7 +429,8 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   display: block;
   width: 0px;
   height: 0px;
-  background: #fa183d;
+  background: #aaa;
+  font-size: 15px;
   border-radius: 50%;
   padding: 20px;
   margin-top: 25px !important;
@@ -439,14 +445,14 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   display: block;
   width: 30px;
   height: 30px;
-  background: #ff4c60;
+  background: #aaa;
   border-radius: 50%;
   padding: 20px;
   margin-top: 0px;
   animation: pulse-border 1500ms ease-out infinite;
 }
 #controls-container #play-all-button:after {
-  content: "All";
+  content: "Play all";
   position: absolute;
   z-index: 1;
   margin-top: 0px;
@@ -467,7 +473,7 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   padding: 20px;
 }
 #controls-container #play-all-button:hover:after {
-  background-color: #f1ad34;
+  background-color: #46260F;
   border-top: 0px solid transparent;
   border-bottom: 0px solid transparent;
   border-left: 0px solid transparent;
@@ -522,41 +528,54 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
 .modal-content {
   position: relative;
   background-color: #46260F;
-  margin: 10% auto; /* 10% from the top and centered */
+  margin: 10% auto;
   padding: 20px;
   justify-content: center;
-  width: 25%; /* Adjust as necessary */
-  z-index: 1001; /* Above the overlay */
+  height: 600px;
+  width: 25%;
+  z-index: 1001;
   animation: fadeIn 0.5s;
+  background-image: url(/src/assets/icons/sce_killswitch.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .killswitch {
   max-width: 100%;
-  height: auto;
+  height: 60px;
   width: 350px;
   margin-left: 5%;
-  margin-top: -30px;
   margin-bottom: 15px;
   border-radius: 10px;
 }
 
+.btn-group {
+  display: grid;
+  margin-top: 5%;
+  justify-content: center;
+  width: 100%;
+  gap: 350px;
+}
+
 .explore-button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #46260F;
   color: white;
+  width: 250px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
 }
 .explore-button:hover {
-  background-color: #0062cc;
+  background-color: #bc9e68;
 }
 
 .close {
   color: #aaa;
-  float: right;
+  float: left;
   font-size: 28px;
+  margin-top: -75px;
+  margin-bottom: 50px;
   font-weight: bold;
 }
 
@@ -565,4 +584,16 @@ body { /* or use .wrapper if you prefer to wrap your .quiz-container */
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
 }/*# sourceMappingURL=global.css.map */
